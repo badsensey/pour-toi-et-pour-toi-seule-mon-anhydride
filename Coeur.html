@@ -12,7 +12,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            cursor: pointer;
+            cursor: pointer; /* Change le curseur pour indiquer qu'un clic est possible */
         }
         h1 {
             margin-top: 20px;
@@ -22,35 +22,32 @@
             position: relative;
             max-width: 80%;
             margin: auto;
-            overflow: visible;
+            overflow: visible; /* Permet de voir les éléments qui dépassent */
             display: flex;
-            align-items: center;
+            flex-direction: column; /* Organise en colonne */
+            align-items: center; /* Centrer horizontalement */
         }
         .slides {
             display: none;
             width: 100%;
-            max-width: 600px;
+            max-width: 600px; /* Ajuste la largeur de l'image */
             height: auto;
             margin: auto;
         }
-        /* Roses */
-        .roses-left, .roses-right {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
+        /* Positionnement des roses en bas */
+        .roses-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px; /* Espace entre l'image et les roses */
+        }
+        .roses-container img {
+            width: 50px; /* Taille des roses */
             height: auto;
-            z-index: 10;
-        }
-        .roses-left {
-            left: -80px;
-        }
-        .roses-right {
-            right: -80px;
+            margin: 0 5px; /* Espacement entre les roses */
         }
         /* Cœurs */
         .heart {
-            font-size: 3em;
+            font-size: 4em; /* Taille des cœurs */
             color: red;
             position: absolute;
             top: 50%;
@@ -58,10 +55,10 @@
             z-index: 10;
         }
         .heart-left {
-            left: -120px;
+            left: -50px; /* Rapprocher du bord gauche */
         }
         .heart-right {
-            right: -120px;
+            right: -50px; /* Rapprocher du bord droit */
         }
         .prev, .next {
             cursor: pointer;
@@ -103,15 +100,18 @@
         <span class="heart heart-left">&#10084;</span>
         <span class="heart heart-right">&#10084;</span>
 
-        <!-- Roses à gauche et à droite des images -->
-        <img class="roses-left" src="/pour-toi-et-pour-toi-seule-mon-anhydride/anhydride/rose.png" alt="Rose">
-        <img class="roses-right" src="/pour-toi-et-pour-toi-seule-mon-anhydride/anhydride/rose.png" alt="Rose">
-        
         <!-- Diaporama -->
-        <img class="slides" src="/pour-toi-et-pour-toi-seule-mon-anhydride/anhydride/coeur1.png" alt="Coeur1">
-        <img class="slides" src="/pour-toi-et-pour-toi-seule-mon-anhydride/anhydride/fleur.png" alt="Fleur">
-        <img class="slides" src="/pour-toi-et-pour-toi-seule-mon-anhydride/anhydride/main.png" alt="Main">
-        <img class="slides" src="/pour-toi-et-pour-toi-seule-mon-anhydride/anhydride/jtaime1.png" alt="Jtaime1">
+        <img class="slides" src="anhydride/coeur1.png" alt="Coeur1">
+        <img class="slides" src="anhydride/fleur.png" alt="Fleur">
+        <img class="slides" src="anhydride/main.png" alt="Main">
+        <img class="slides" src="anhydride/jtaime1.png" alt="Jtaime1">
+
+        <!-- Roses en bas -->
+        <div class="roses-container">
+            <img src="anhydride/rose.png" alt="Rose">
+            <img src="anhydride/rose.png" alt="Rose">
+            <img src="anhydride/rose.png" alt="Rose">
+        </div>
 
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -122,7 +122,7 @@
     </div>
 
     <audio class="music" loop>
-        <source src="/pour-toi-et-pour-toi-seule-mon-anhydride/anhydride/music.mp3" type="audio/mpeg">
+        <source src="anhydride/music.mp3" type="audio/mpeg">
         Votre navigateur ne supporte pas l'audio.
     </audio>
 
@@ -144,9 +144,9 @@
             slides[slideIndex].style.display = "block";
         }
 
-        setInterval(() => plusSlides(1), 5000);
+        setInterval(() => plusSlides(1), 5000); // Change image every 5 seconds
 
-        // Lecture de la musique sur interaction utilisateur
+        // Lancement de la musique dès que l'utilisateur clique sur la page
         window.onclick = function() {
             const audio = document.querySelector('audio');
             audio.play();
